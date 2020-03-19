@@ -14,7 +14,7 @@
       <div class="miste-content">
         <nav class="msite_nav">
           <!-- swiper -->
-          <!-- <div class="swiper-container">
+          <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <a
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="swiper-pagination"></div>
-          </div> -->
+          </div>
         </nav>
         <!-- list -->
         <div class="msite_shop_list">
@@ -47,8 +47,9 @@
 </template>
 
 <script>
+import BScroll from "better-scroll";
 import Swiper from "swiper";
-// import "swiper/css/swiper.min.css";
+import "swiper/css/swiper.min.css";
 import Header from "../../components/header/header";
 import ShopList from "../../components/shopList/shopList";
 export default {
@@ -72,6 +73,10 @@ export default {
       pagination: {
         el: ".swiper-pagination"
       }
+    });
+
+    new BScroll(".miste-content-wrapper", {
+      click: true
     });
   },
 

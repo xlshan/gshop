@@ -6,11 +6,10 @@
 </template>
 
 <script>
-import Header from '../../components/header/header'
+import Header from "../../components/header/header";
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
 
   components: {
@@ -19,12 +18,9 @@ export default {
 
   computed: {},
 
-  mounted () {
-
-  },
+  mounted() {},
 
   methods: {}
-}
-
+};
 </script>
-<style lang='stylus' re="stylesheet/stylus"></style>
+<style lang="stylus" re="stylesheet/stylus"></style>
