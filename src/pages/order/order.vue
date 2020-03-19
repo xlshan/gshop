@@ -1,20 +1,25 @@
 <!--  -->
 <template>
-  <div>order</div>
+  <div>
+    <Header title="订单" />
+  </div>
 </template>
 
 <script>
+import Header from '../../components/header/header'
 export default {
   data () {
     return {
     }
   },
 
-  components: {},
+  components: {
+    Header
+  },
 
   computed: {},
 
-  mounted: {},
+  mounted () { },
 
   methods: {}
 }

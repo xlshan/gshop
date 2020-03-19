@@ -1,27 +1,22 @@
 <!--  -->
 <template>
   <div>
-    <Header title="搜索" />
+    login
   </div>
 </template>
 
 <script>
-import Header from '../../components/header/header'
 export default {
   data () {
     return {
     }
   },
 
-  components: {
-    Header
-  },
+  components: {},
 
   computed: {},
 
-  mounted () {
-
-  },
+  mounted () { },
 
   methods: {}
 }

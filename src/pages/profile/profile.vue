@@ -1,22 +1,25 @@
 <!--  -->
 <template>
   <div>
-    person
+    <Header title="我的" />
   </div>
 </template>
 
 <script>
+import Header from '../../components/header/header'
 export default {
   data () {
     return {
     }
   },
 
-  components: {},
+  components: {
+    Header
+  },
 
   computed: {},
 
-  mounted: {},
+  mounted () { },
 
   methods: {}
 }

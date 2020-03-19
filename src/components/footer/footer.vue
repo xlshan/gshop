@@ -33,6 +33,9 @@
       goTo (path) {
         this.$router.replace(path)
       }
+    },
+    mounted (){
+      
     }
   }
 </script>
