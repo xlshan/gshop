@@ -27,7 +27,7 @@
           <section class="item_right">
             <div class="item_right_text">
               <p>
-                <span>{{ item.name }}</span>
+                <span>xxx</span>
               </p>
               <p>月售 10 单</p>
               <p>23 元起送 / 距离33公里</p>
