@@ -4,7 +4,7 @@
     <!-- header -->
     <Header title="首页">
       <router-link class="header_search" slot="left" to="/search">
-        <i class="iconfont icon-auto"></i>
+        <i class="iconfont icon-sousuo"></i>
       </router-link>
       <router-link slot="right" class="header_login" :to="{ path: '/login' }">
         登录|注册
@@ -14,7 +14,7 @@
       <div class="miste-content">
         <nav class="msite_nav">
           <!-- swiper -->
-          <div class="swiper-container">
+          <!-- <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <a
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="swiper-pagination"></div>
-          </div>
+          </div> -->
         </nav>
         <!-- list -->
         <div class="msite_shop_list">
@@ -48,7 +48,7 @@
 
 <script>
 import Swiper from "swiper";
-import "swiper/css/swiper.min.css";
+// import "swiper/css/swiper.min.css";
 import Header from "../../components/header/header";
 import ShopList from "../../components/shopList/shopList";
 export default {

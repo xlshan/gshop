@@ -6,27 +6,37 @@
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
           <a>短信登录</a>
-          <a>密码登录 </a> </div>
+          <a>密码登录 </a>
+        </div>
       </div>
       <div class="login_content">
         <form>
           <div class="on">
             <section class="login_message">
-              <input type="tel" maxlength="11" placeholder="手机号">
-              <button disabled="disabled" class="get_verification">获取验证码</button>
+              <input type="tel" maxlength="11" placeholder="手机号" />
+              <button disabled="disabled" class="get_verification">
+                获取验证码
+              </button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码"> </section>
+              <input type="tel" maxlength="8" placeholder="验证码" />
+            </section>
             <section class="login_hint">
               温馨提示:未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
-              <a href="javascript:;">《用户服务协议》</a> </section>
+              <a href="javascript:;">《用户服务协议》</a>
+            </section>
           </div>
           <div>
             <section>
               <section class="login_message">
-                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名"> </section>
+                <input
+                  type="tel"
+                  maxlength="11"
+                  placeholder="手机/邮箱/用户名"
+                />
+              </section>
               <section class="login_verification">
-                <input type="tel" maxlength="8" placeholder="密码">
+                <input type="tel" maxlength="8" placeholder="密码" />
                 <div class="switch_button off">
                   <div class="switch_circle"></div>
                   <span class="switch_text">...</span>
@@ -42,7 +52,7 @@
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
       <span href="javascript:" class="go_back" @click="$router.back()">
-        <i class="iconfont icon-auto"></i>
+        <i class="iconfont icon-jiantou2"></i>
       </span>
     </div>
   </div>
@@ -50,21 +60,20 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       loginWay: true
-    }
+    };
   },
 
   components: {},
 
   computed: {},
 
-  mounted () { },
+  mounted() {},
 
   methods: {}
-}
-
+};
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import '../../common/stylus/mixins.stylus'
