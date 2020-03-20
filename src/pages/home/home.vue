@@ -14,7 +14,7 @@
       <div class="miste-content">
         <nav class="msite_nav">
           <!-- swiper -->
-          <div class="swiper-container">
+          <div class="swiper-container" v-if="categorys.length">
             <div class="swiper-wrapper">
               <div
                 class="swiper-slide"
@@ -36,6 +36,7 @@
             </div>
             <div class="swiper-pagination"></div>
           </div>
+          <img src="./images/msite_back.svg" alt="back" v-else />
         </nav>
         <!-- list -->
         <div class="msite_shop_list">
@@ -71,11 +72,10 @@ export default {
   },
 
   computed: {
-    ...mapState(["address", "categorys"]),
+    ...mapState(["address", "categorys",'shops']),
 
     categorysArr() {
       const { categorys } = this;
-      console.log(this);
       const arr = [];
       let minArr = [];
 
@@ -110,10 +110,11 @@ export default {
   },
   mounted() {
     this.getCategorys();
+    this.getShops();
   },
 
   methods: {
-    ...mapActions(["getCategorys"])
+    ...mapActions(["getCategorys",'getShops'])
   }
 };
 </script>
