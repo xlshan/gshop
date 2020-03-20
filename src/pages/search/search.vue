@@ -2,65 +2,87 @@
 <template>
   <div class="search">
     <Header title="搜索" />
-    <form class="search_form" @submit.prevent="search">
+    <form class="search_form">
       <input
         type="search"
         placeholder="请输入商家名称"
         class="search_input"
         v-model="keyword"
       />
-      <input type="submit" class="search_submit" />
+      <input type="submit" class="search_submit" @click.prevent="search" />
     </form>
 
     <section class="list">
-      <ul class="list_container">
+      <ul class="list_container" v-if="!isList">
         <router-link
           :to="{ path: '/shop', query: { id: item.id } }"
           tag="li"
-          v-for="(item, index) in 3"
+          v-for="(item, index) in shopList"
           :key="index"
           class="list_li"
         >
           <section class="item_left">
-            <img :src="imgBaseUrl" class="restaurant_img" />
+            <img :src="imgBaseUrl + item.image_path" class="restaurant_img" />
           </section>
           <section class="item_right">
             <div class="item_right_text">
               <p>
-                <span>xxx</span>
+                <span>{{ item.name }}</span>
               </p>
-              <p>月售 10 单</p>
-              <p>23 元起送 / 距离33公里</p>
+              <p>月售 {{ item.month_sales || item.recent_order_num }} 单</p>
+              <p>
+                {{ item.delivery_fee || item.float_minimum_order_amount }}
+                元起送 / 距离{{ item.distance }}
+              </p>
             </div>
           </section>
         </router-link>
       </ul>
+      <div class="search_none" v-else>很抱歉！无搜索结果</div>
     </section>
   </div>
 </template>
 
 <script>
+import BScroll from "better-scroll";
+import { reqSearch } from "../../api/index";
 import Header from "../../components/header/header";
 export default {
   data() {
     return {
       keyword: null,
       imgBaseUrl: "http://cangdu.org:8001/img/",
-      noSearchShops: false
+      noSearchShops: false,
+      shopList: [],
+      isList: false
     };
   },
 
   components: {
     Header
   },
-
   computed: {},
 
   mounted() {},
 
   methods: {
-    search() {
-      console.log(this.keyword);
+    async search() {
+      const { keyword } = this;
+      if (keyword) {
+        let res = await reqSearch({ keyword, geohash: "40.10038,116.36867" });
+        if (res.code == 0) {
+          if (res.data.length == 0) {
+            this.isList = true;
+          } else {
+            this.isList = false;
+          }
+          this.shopList = res.data;
+        } else {
+          alert(res.msg);
+        }
+      } else {
+        alert("请输入关键字");
+      }
     }
   }
 };
@@ -70,7 +92,7 @@ export default {
 .search
   width 100%
   height 100%
-  overflow hidden
+  // overflow hidden
   .search_form
     clearFix()
     margin-top 45px
@@ -98,6 +120,7 @@ export default {
         background-color #02a774
 
   .list
+    margin-bottom 45px
     .list_container
       background-color: #fff;
       .list_li

@@ -22,3 +22,7 @@ export const reqLoginPsw = ({ name, pwd, captcha }) =>
 // 验证码登录
 export const reqLoginMsg = ({ name, code }) =>
     ajax(BASE_URL + "/login_sms", { name, code }, "POST");
+
+// 搜索
+export const reqSearch = ({ keyword, geohash }) =>
+    ajax(BASE_URL + "/search_shops", { keyword, geohash });
