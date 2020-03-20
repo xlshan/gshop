@@ -2,7 +2,7 @@
   <div class="star" :class="'star-' + size">
     <span
       class="star-item"
-      v-for="(sc, index) in 4"
+      v-for="(sc, index) in starArr"
       :class="sc"
       :key="index"
     ></span>
@@ -10,15 +10,41 @@
 </template>
 
 <script>
+const CLASS_ON = "on",
+  CLASS_HALF = "half",
+  CLASS_OFF = "off";
 export default {
   data() {
     return {};
   },
-  props: ["size"],
+  props: ["score", "size"],
   components: {},
+  computed: {
+    starArr() {
+      let arr = [];
+      const { score } = this;
+      // add CLASS_ON n个
+      const s = Math.floor(score);
+      for (let index = 0; index < s; index++) {
+        arr.push(CLASS_ON);
+      }
+      // add CLASS_HALF  (0/1个 >=0.5)
+      if (score * 10 - s * 10 >= 5) {
+        arr.push(CLASS_HALF);
+      }
+
+      // add CLASS_OFF n个
+      while (arr.length < 5) {
+        arr.push(CLASS_OFF);
+      }
+      return arr;
+    }
+  },
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {
+    this.starArr;
+  }
 };
 </script>
 
