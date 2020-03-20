@@ -16,17 +16,21 @@
           <!-- swiper -->
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
+              <div
+                class="swiper-slide"
+                v-for="(x, x_index) in categorysArr"
+                :key="x_index"
+              >
                 <a
                   href="javascript:;"
                   class="link_to_food"
-                  v-for="(x, x_index) in 20"
-                  :key="x_index"
+                  v-for="(y, y_index) in x"
+                  :key="y_index"
                 >
                   <div class="food_container">
-                    <img src="./images/nav/14.jpg" alt="" />
+                    <img :src="baseImageUrl + y.image_url" alt="" />
                   </div>
-                  <span>甜品饮品</span>
+                  <span>{{ y.title }}</span>
                 </a>
               </div>
             </div>
@@ -52,6 +56,8 @@ import Swiper from "swiper";
 import "swiper/css/swiper.min.css";
 import Header from "../../components/header/header";
 import ShopList from "../../components/shopList/shopList";
+import { reqCategorys } from "../../api/index";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -64,23 +70,51 @@ export default {
     ShopList
   },
 
-  computed: {},
+  computed: {
+    ...mapState(["address", "categorys"]),
 
+    categorysArr() {
+      const { categorys } = this;
+      console.log(this);
+      const arr = [];
+      let minArr = [];
+
+      categorys.forEach(c => {
+        if (minArr.length == 8) {
+          minArr = [];
+        }
+        if (minArr.length == 0) {
+          arr.push(minArr);
+        }
+        minArr.push(c);
+      });
+      return arr;
+    }
+  },
+  watch: {
+    categorys() {
+      this.$nextTick(function() {
+        new Swiper(".swiper-container", {
+          loop: true, // 可以循环轮播
+          // 如果需要分页器
+          pagination: {
+            el: ".swiper-pagination"
+          }
+        });
+
+        new BScroll(".miste-content-wrapper", {
+          click: true
+        });
+      });
+    }
+  },
   mounted() {
-    new Swiper(".swiper-container", {
-      loop: true, // 可以循环轮播
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination"
-      }
-    });
-
-    new BScroll(".miste-content-wrapper", {
-      click: true
-    });
+    this.getCategorys();
   },
 
-  methods: {}
+  methods: {
+    ...mapActions(["getCategorys"])
+  }
 };
 </script>
 
