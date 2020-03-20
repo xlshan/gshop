@@ -28,6 +28,7 @@ export default {
       for (let index = 0; index < s; index++) {
         arr.push(CLASS_ON);
       }
+      
       // add CLASS_HALF  (0/1个 >=0.5)
       if (score * 10 - s * 10 >= 5) {
         arr.push(CLASS_HALF);

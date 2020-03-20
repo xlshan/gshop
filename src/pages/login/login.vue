@@ -5,49 +5,84 @@
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
-          <a>短信登录</a>
-          <a>密码登录 </a>
+          <a :class="{ on: isMsg }" @click="isMsg = true">短信登录</a>
+          <a :class="{ on: !isMsg }" @click="isMsg = false">密码登录 </a>
         </div>
       </div>
       <div class="login_content">
         <form>
-          <div class="on">
+          <!-- 短信登录 -->
+          <div :class="{ on: isMsg }">
             <section class="login_message">
-              <input type="tel" maxlength="11" placeholder="手机号" />
-              <button disabled="disabled" class="get_verification">
-                获取验证码
+              <input
+                type="tel"
+                maxlength="11"
+                placeholder="手机号"
+                v-model="phone"
+              />
+              <button
+                class="get_verification"
+                :disabled="!rightPhone"
+                :class="{ right_phone: rightPhone }"
+                @click.prevent="getCode"
+              >
+                {{ computedTime > 0 ? `已发送${computedTime}s` : "获取验证码" }}
               </button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码" />
+              <input
+                type="tel"
+                maxlength="8"
+                placeholder="验证码"
+                v-model="code"
+              />
             </section>
             <section class="login_hint">
               温馨提示:未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
               <a href="javascript:;">《用户服务协议》</a>
             </section>
           </div>
-          <div>
+          <!-- 密码登录 -->
+          <div :class="{ on: !isMsg }">
             <section>
               <section class="login_message">
                 <input
                   type="tel"
                   maxlength="11"
                   placeholder="手机/邮箱/用户名"
+                  v-model="name"
                 />
               </section>
               <section class="login_verification">
-                <input type="tel" maxlength="8" placeholder="密码" />
+                <input
+                  type="tel"
+                  maxlength="8"
+                  placeholder="密码"
+                  v-model="pwd"
+                />
                 <div class="switch_button off">
                   <div class="switch_circle"></div>
                   <span class="switch_text">...</span>
                 </div>
               </section>
               <section class="login_message">
-                <input type="text" maxlength="11" placeholder="验证码" />
+                <input
+                  type="text"
+                  maxlength="11"
+                  placeholder="验证码"
+                  v-model="captcha"
+                />
+                <img
+                  class="get_verification"
+                  src="http://localhost:4000/captcha"
+                  alt="captcha"
+                  ref="captcha"
+                  @click="getCaptcha"
+                />
               </section>
             </section>
           </div>
-          <button class="login_submit">登录</button>
+          <button class="login_submit" @click.prevent="submit">登录</button>
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
@@ -59,20 +94,85 @@
 </template>
 
 <script>
+import { reqSendCode, reqLoginPsw, reqLoginMsg } from "../../api/index";
+import ajax from "../../api/ajax";
 export default {
   data() {
     return {
-      loginWay: true
+      isMsg: false,
+      isDisable: true,
+      phone: null,
+      code: null,
+      computedTime: 0,
+      name: null,
+      pwd: null,
+      captcha: null
     };
   },
 
   components: {},
 
-  computed: {},
+  computed: {
+    rightPhone() {
+      return /^1\d{10}$/.test(this.phone);
+    }
+  },
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    async submit() {
+      if (!this.isMsg) {
+        const { name, pwd, captcha } = this;
+        // isMsg=true  短信登录
+        // isMsg=false  密码登录
+        if (name && pwd && captcha) {
+          let res = await reqLoginPsw({ name, pwd, captcha });
+          if (res.code == 0) {
+            this.$router.replace("/profile");
+          } else {
+            alert(res.msg);
+          }
+        } else {
+          alert("请输入");
+        }
+      } else {
+        const { phone, code } = this;
+        if (phone && code) {
+          let res = await reqLoginMsg({ name, pwd, captcha });
+          if (res.code == 0) {
+            this.$router.replace("/profile");
+          } else {
+            alert(res.msg);
+          }
+        } else {
+          alert("请输入");
+        }
+      }
+    },
+    getCaptcha() {
+      this.$refs.captcha.src =
+        "http://localhost:4000/captcha?time=" + Date.now();
+    },
+    async getCode() {
+      // 倒计时
+      if (!this.computedTime) {
+        this.computedTime = 30;
+        let timer = setInterval(() => {
+          this.computedTime--;
+          if (this.computedTime <= 0) {
+            clearInterval(timer);
+          }
+        }, 1000);
+
+        let res = await reqSendCode(this.phone);
+        if (res.code == 0) {
+        } else {
+          alert(res.msg);
+        }
+      }
+    }
+  }
 };
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
