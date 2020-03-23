@@ -5,6 +5,8 @@ import { Button } from "mint-ui";
 import App from "./App";
 import router from "./router";
 import store from "./store";
+import "./mock/mockServer";
+import "./filter/filter"; // 加载过滤器
 
 Vue.config.productionTip = false;
 

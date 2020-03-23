@@ -3,3 +3,6 @@ export const RECEIVE_CATEGORYS = "receive_categorys";
 export const RECEIVE_SHOPS = "receive_shops";
 export const RECORD_USER = "record_user";
 export const RESET_USER = "reset_user";
+export const RECEIVE_RATAING = "receive_rataing";
+export const RECEIVE_GOODS = "receive_goods";
+export const RECEIVE_INFO = "receive_info";

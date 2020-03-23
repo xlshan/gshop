@@ -28,3 +28,12 @@ export const reqUserInfo = () => ajax(BASE_URL + "/userinfo");
 
 // 退出登录
 export const reqLogout = () => ajax(BASE_URL + "/logout");
+
+// 获取评论列表
+export const reqRating = () => ajax('/ratings')
+
+// 获取商品信息
+export const reqGoods = () => ajax('/goods')
+
+// 获取商家信息
+export const reqInfo = () => ajax('/info')
