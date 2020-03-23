@@ -23,6 +23,8 @@ export const reqLoginMsg = ({ phone, code }) => ajax(BASE_URL + "/login_sms", { 
 // 搜索
 export const reqSearch = ({ keyword, geohash }) => ajax(BASE_URL + "/search_shops", { keyword, geohash });
 
-
 // 获取用户信息
 export const reqUserInfo = () => ajax(BASE_URL + "/userinfo");
+
+// 退出登录
+export const reqLogout = () => ajax(BASE_URL + "/logout");

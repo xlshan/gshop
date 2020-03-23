@@ -2,7 +2,7 @@
   <section class="profile">
     <Header title="我的" />
     <section class="profile-number">
-      <router-link :to="'/login'" class="profile-link">
+      <router-link :to="userInfo._id?'/userinfo':'/login'" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
@@ -91,15 +91,13 @@
     </section>
 
     <section class="profile_my_order border-1px">
-      <mt-button type="danger" style="width: 100%" @click="logout"
-        >退出登陆</mt-button
-      >
+      <mt-button type="danger" style="width: 100%" @click="logoutFn" v-if="userInfo._id">退出登陆</mt-button>
     </section>
   </section>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState ,mapActions} from "vuex";
 import { MessageBox, Toast } from "mint-ui";
 import Header from "../../components/header/header";
 export default {
@@ -107,11 +105,13 @@ export default {
     ...mapState(['userInfo'])
   },
   methods: {
-    logout() {
+
+    logoutFn() {
       MessageBox.confirm("确认退出吗?").then(
         action => {
           // 请求退出
           this.$store.dispatch("logout");
+          
           Toast("登出完成");
         },
         action => {

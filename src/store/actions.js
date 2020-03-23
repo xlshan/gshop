@@ -1,6 +1,6 @@
 import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECORD_USER } from "./mutation-types";
 
-import { reqAddress, reqCategorys, reqShops, reqUserInfo } from "../api";
+import { reqAddress, reqCategorys, reqShops, reqUserInfo, reqLogout } from "../api";
 
 export default {
     async getCategorys({ commit, state }) {
@@ -31,5 +31,14 @@ export default {
             let user = res.data
             commit(RECORD_USER, { user })
         }
+    },
+
+
+    async logout({ commit }) {
+        let res = await reqLogout();
+        if (res.code == 0) {
+            commit(RECORD_USER)
+        }
     }
+
 };

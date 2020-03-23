@@ -1,19 +1,26 @@
 <template>
   <section class="order">
     <Header title="订单列表" />
-    <section class="order_no_login">
+    <section class="order_no_login" v-if="!userInfo._id">
       <img src="./images/person.png" />
       <h3>登录后查看外卖订单</h3>
       <button>立即登陆</button>
+    </section>
+    <section class="order-box" v-else>
+      <div>我的订单</div>
     </section>
   </section>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import Header from "../../components/header/header";
 export default {
   components: {
     Header
+  },
+  computed:{
+    ...mapState(['userInfo'])
   }
 };
 </script>
@@ -22,6 +29,9 @@ export default {
 @import "../../common/stylus/mixins.stylus"
 .order  //订单
   width 100%
+  .order-box 
+      position relative
+      top 45px
   .header
     background-color #02a774
     position fixed
@@ -82,5 +92,5 @@ export default {
       border 0
       outline none
       border-radius 5px
-      padding 10px 20px
+      padding 10px 20px 
 </style>
