@@ -6,13 +6,19 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
 import Footer from './components/footer/footer'
-
 export default {
   name: 'App',
   components: {
 
     Footer
+  },
+  methods:{
+    ...mapActions(['getUserInfo'])
+  },
+  mounted(){
+    this.getUserInfo()
   }
 }
 </script>

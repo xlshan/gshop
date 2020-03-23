@@ -6,8 +6,9 @@
       <router-link class="header_search" slot="left" to="/search">
         <i class="iconfont icon-sousuo"></i>
       </router-link>
-      <router-link slot="right" class="header_login" :to="{ path: '/login' }">
-        登录|注册
+      <router-link slot="right" class="header_login" :to="userInfo._id ? '/userinfo' : '/login'">
+        <i class="iconfont icon-person" v-if="userInfo._id"></i>
+        <span v-else>登录|注册</span>
       </router-link>
     </Header>
     <div class="miste-content-wrapper">
@@ -72,7 +73,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["address", "categorys",'shops']),
+    ...mapState(["address", "categorys",'shops', 'userInfo']),
 
     categorysArr() {
       const { categorys } = this;
