@@ -1,4 +1,4 @@
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECORD_USER } from "./mutation-types";
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECORD_USER, RESET_USER } from "./mutation-types";
 
 import { reqAddress, reqCategorys, reqShops, reqUserInfo, reqLogout } from "../api";
 
@@ -37,7 +37,7 @@ export default {
     async logout({ commit }) {
         let res = await reqLogout();
         if (res.code == 0) {
-            commit(RECORD_USER)
+            commit(RESET_USER)
         }
     }
 
