@@ -1,4 +1,4 @@
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS } from "./mutation-types";
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECORD_USER } from "./mutation-types";
 
 import { reqAddress, reqCategorys, reqShops } from "../api";
 
@@ -18,5 +18,9 @@ export default {
             const shops = res.data
             commit(RECEIVE_SHOPS, { shops })
         }
+    },
+
+    recordUserInfo({ commit }, user) {
+        commit(RECORD_USER, { user })
     }
 };

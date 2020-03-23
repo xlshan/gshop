@@ -1,4 +1,4 @@
-import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS } from "./mutation-types";
+import { RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECORD_USER } from "./mutation-types";
 
 export default {
     [RECEIVE_ADDRESS](state, { address }) {
@@ -10,4 +10,7 @@ export default {
     [RECEIVE_SHOPS](state, { shops }) {
         state.shops = shops
     },
+    [RECORD_USER](state, { user }) {
+        state.userInfo = user
+    }
 };

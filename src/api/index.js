@@ -20,8 +20,8 @@ export const reqLoginPsw = ({ name, pwd, captcha }) =>
     ajax(BASE_URL + "/login_pwd", { name, pwd, captcha }, "POST");
 
 // 验证码登录
-export const reqLoginMsg = ({ name, code }) =>
-    ajax(BASE_URL + "/login_sms", { name, code }, "POST");
+export const reqLoginMsg = ({ phone, code }) =>
+    ajax(BASE_URL + "/login_sms", { phone, code }, "POST");
 
 // 搜索
 export const reqSearch = ({ keyword, geohash }) =>

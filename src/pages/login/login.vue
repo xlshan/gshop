@@ -5,8 +5,14 @@
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
-          <a :class="{ on: isMsg }" @click="isMsg = true">短信登录</a>
-          <a :class="{ on: !isMsg }" @click="isMsg = false">密码登录 </a>
+          <a
+            :class="{ on: isMsg }"
+            @click="isMsg = true"
+          >短信登录</a>
+          <a
+            :class="{ on: !isMsg }"
+            @click="isMsg = false"
+          >密码登录 </a>
         </div>
       </div>
       <div class="login_content">
@@ -82,11 +88,21 @@
               </section>
             </section>
           </div>
-          <button class="login_submit" @click.prevent="submit">登录</button>
+          <button
+            class="login_submit"
+            @click.prevent="submit"
+          >登录</button>
         </form>
-        <a href="javascript:;" class="about_us">关于我们</a>
+        <a
+          href="javascript:;"
+          class="about_us"
+        >关于我们</a>
       </div>
-      <span href="javascript:" class="go_back" @click="$router.back()">
+      <span
+        href="javascript:"
+        class="go_back"
+        @click="$router.back()"
+      >
         <i class="iconfont icon-jiantou2"></i>
       </span>
     </div>
@@ -97,7 +113,7 @@
 import { reqSendCode, reqLoginPsw, reqLoginMsg } from "../../api/index";
 import ajax from "../../api/ajax";
 export default {
-  data() {
+  data () {
     return {
       isMsg: false,
       isDisable: true,
@@ -113,15 +129,15 @@ export default {
   components: {},
 
   computed: {
-    rightPhone() {
+    rightPhone () {
       return /^1\d{10}$/.test(this.phone);
     }
   },
 
-  mounted() {},
+  mounted () { },
 
   methods: {
-    async submit() {
+    async submit () {
       if (!this.isMsg) {
         const { name, pwd, captcha } = this;
         // isMsg=true  短信登录
@@ -129,9 +145,12 @@ export default {
         if (name && pwd && captcha) {
           let res = await reqLoginPsw({ name, pwd, captcha });
           if (res.code == 0) {
+            this.$store.dispatch('recordUserInfo', res.data)
             this.$router.replace("/profile");
           } else {
             alert(res.msg);
+            // 失败后重新获取验证码
+            this.getCaptcha()
           }
         } else {
           alert("请输入");
@@ -139,8 +158,9 @@ export default {
       } else {
         const { phone, code } = this;
         if (phone && code) {
-          let res = await reqLoginMsg({ name, pwd, captcha });
+          let res = await reqLoginMsg({ phone, code });
           if (res.code == 0) {
+            this.$store.dispatch('recordUserInfo', res.data)
             this.$router.replace("/profile");
           } else {
             alert(res.msg);
@@ -150,11 +170,11 @@ export default {
         }
       }
     },
-    getCaptcha() {
+    getCaptcha () {
       this.$refs.captcha.src =
         "http://localhost:4000/captcha?time=" + Date.now();
     },
-    async getCode() {
+    async getCode () {
       // 倒计时
       if (!this.computedTime) {
         this.computedTime = 30;

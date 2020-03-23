@@ -7,7 +7,8 @@
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top" v-if="userInfo._id">{{userInfo.phone || userInfo.name}}</p>
+          <p class="user-info-top" v-else>登录/注册</p>
           <p>
             <span class="user-icon">
               <i class="iconfont icon-shouji icon-mobile"></i>
@@ -103,7 +104,7 @@ import { MessageBox, Toast } from "mint-ui";
 import Header from "../../components/header/header";
 export default {
   computed: {
-    // ...mapState(['userInfo'])
+    ...mapState(['userInfo'])
   },
   methods: {
     logout() {
