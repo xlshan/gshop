@@ -50,7 +50,7 @@
 
       <div class="rating-wrapper">
         <ul>
-          <li class="rating-item" v-for="(r, index) in rating" :key="index">
+          <li class="rating-item" v-for="(r, index) in filterRating" :key="index">
             <div class="avatar">
               <img width="28" height="28" :src="r.avatar" />
             </div>
@@ -99,7 +99,17 @@ export default {
     Star
   },
   computed: {
-    ...mapState(["rating"])
+    ...mapState(["rating"]),
+
+    filterRating(){
+      let {rating,selectType,onlyShowText} = this
+      console.log(rating)
+      return rating.filter(item=>{
+        let {rateType, text} = item
+        return (selectType ==2 || selectType== rateType) && (text.length>0 || !onlyShowText)
+      })
+      
+    }
   },
   methods: {
     ...mapActions(["getRatings"]),
