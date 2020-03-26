@@ -1,7 +1,7 @@
 <template>
   <div class="ratings" ref="ratingsRef">
     <div class="ratings-content">
-      <!-- <div class="overview">
+      <div class="overview">
         <div class="overview-left">
           <h1 class="score">{{info.score}}</h1>
           <div class="title">综合评分</div>
@@ -23,7 +23,7 @@
             <span class="delivery">{{info.deliveryTime}}分钟</span>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <div class="split"></div>
 
@@ -91,7 +91,7 @@ export default {
     Star
   },
   computed: {
-    ...mapState(["rating"]),
+    ...mapState(["info","rating"]),
 
     filterRating () {
       /*
@@ -116,7 +116,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getRatings"]),
+    ...mapActions(["getRatings","getGoodsInfo"]),
     toggleOnlyShowText () {
       this.onlyShowText = !this.onlyShowText
     },
@@ -126,6 +126,7 @@ export default {
   },
   created () { },
   mounted () {
+    this.getGoodsInfo()
     this.getRatings(() => {
       this.$nextTick(() => {
         new BScroll(this.$refs.ratingsRef, {

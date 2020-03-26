@@ -64,5 +64,15 @@ export default {
             commit(RECEIVE_RATAING, { rating });
             callback && callback();
         }
+    },
+
+    async getGoodsInfo({ commit }) {
+        let res = await reqInfo();
+        if (res.code == 0) {
+            let info = res.data;
+            console.log(info)
+            commit(RECEIVE_INFO, { info });
+        }
     }
+
 };
