@@ -70,9 +70,18 @@ export default {
         let res = await reqInfo();
         if (res.code == 0) {
             let info = res.data;
-            console.log(info)
             commit(RECEIVE_INFO, { info });
         }
-    }
+    },
+
+    async getGoods({ commit }, cb) {
+        let res = await reqGoods();
+        if (res.code == 0) {
+            let goods = res.data;
+            commit(RECEIVE_GOODS, { goods });
+            cb && cb()
+        }
+    },
+
 
 };
