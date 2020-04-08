@@ -57,7 +57,7 @@ export default new Router({
         },
         {
             path: "/shop",
-            name: "Shop",
+            // name: "Shop", //一级路由不要设置name
             component: Shop,
             children: [{
                     path: "/shop/goods",
