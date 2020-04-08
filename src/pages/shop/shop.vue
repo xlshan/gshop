@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import shopHeader from "../../components/shop/header";
 export default {
   data() {
@@ -29,9 +30,13 @@ export default {
   components: {
     shopHeader
   },
-  methods: {},
+  methods: {
+    ...mapActions(['getGoodsInfo'])
+  },
   created() {},
-  mounted() {}
+  mounted() {
+    this.getGoodsInfo()
+  }
 };
 </script>
 

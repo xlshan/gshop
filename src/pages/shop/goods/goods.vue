@@ -32,32 +32,40 @@
                     <span class="now">￥{{food.price}}</span>
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
-                  <!-- <div class="cartcontrol-wrapper">
+                  <div class="cartcontrol-wrapper">
                     <CartControl :food="food"/>
-                  </div> -->
+                  </div>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <!-- <ShopCart /> -->
+      <ShopCart />
     </div>
-    <!-- <Food :food="food" ref="food"/> -->
+    <Food :food="food" ref="foodRef"/>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
 import { mapState, mapActions } from 'vuex'
+import CartControl from './../../../components/cartControl/cartControl'
+import ShopCart from './../../../components/shopCart/shopCart.vue'
+import Food from './../../../components/food/food.vue'
 export default {
   data () {
     return {
       scrollY: 0,
-      tops: []
+      tops: [],
+      food: {}
     };
   },
-  components: {},
+  components: {
+    CartControl,
+    ShopCart,
+    Food
+  },
   computed: {
     ...mapState(['goods']),
     active () {
@@ -75,6 +83,10 @@ export default {
   },
   methods: {
     ...mapActions(['getGoods']),
+    showFood(food) {
+      this.food = food
+      this.$refs.foodRef.toggleShow()
+    },
     clickMenuItem (index) {
       this.scrollY = this.tops[index]
       this.rightScroll.scrollTo(0, -this.scrollY, 300)
@@ -90,17 +102,10 @@ export default {
         tops.push(top)
       })
       this.tops = tops
-      console.log(this.tops)
     },
     initScroll () {
       let m = this.$refs.menuRef.getElementsByClassName('menu-item')
       let ms = [...m]
-      console.log(ms)
-      // ms.forEach((ite,idx)=>{
-      //   clientHeight
-      // })
-
-
       this.leftScroll = new BScroll('.menu-wrapper', {
         click: true,
         probeType: 2

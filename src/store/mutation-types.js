@@ -6,3 +6,6 @@ export const RESET_USER = "reset_user";
 export const RECEIVE_RATAING = "receive_rataing";
 export const RECEIVE_GOODS = "receive_goods";
 export const RECEIVE_INFO = "receive_info";
+export const ADD_FOOD = "add_food";
+export const DEC_FOOD = "dec_food";
+export const CLEAR_FOOD = "clear_food";

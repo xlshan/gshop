@@ -69,14 +69,13 @@ export default {
   },
   components: {},
   methods: {
-    ...mapActions(['getGoodsInfo'])
+    
   },
   created() {},
   mounted() {
-    new BScroll({
+    // new BScroll({
       
-    })
-    this.getGoodsInfo()
+    // })
   }
 };
 </script>

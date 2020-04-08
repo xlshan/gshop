@@ -5,14 +5,8 @@
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
-          <a
-            :class="{ on: isMsg }"
-            @click="isMsg = true"
-          >短信登录</a>
-          <a
-            :class="{ on: !isMsg }"
-            @click="isMsg = false"
-          >密码登录 </a>
+          <a :class="{ on: isMsg }" @click="isMsg = true">短信登录</a>
+          <a :class="{ on: !isMsg }" @click="isMsg = false">密码登录 </a>
         </div>
       </div>
       <div class="login_content">
@@ -20,28 +14,13 @@
           <!-- 短信登录 -->
           <div :class="{ on: isMsg }">
             <section class="login_message">
-              <input
-                type="tel"
-                maxlength="11"
-                placeholder="手机号"
-                v-model="phone"
-              />
-              <button
-                class="get_verification"
-                :disabled="!rightPhone"
-                :class="{ right_phone: rightPhone }"
-                @click.prevent="getCode"
-              >
+              <input type="tel" maxlength="11" placeholder="手机号" v-model="phone" />
+              <button class="get_verification" :disabled="!rightPhone" :class="{ right_phone: rightPhone }" @click.prevent="getCode">
                 {{ computedTime > 0 ? `已发送${computedTime}s` : "获取验证码" }}
               </button>
             </section>
             <section class="login_verification">
-              <input
-                type="tel"
-                maxlength="8"
-                placeholder="验证码"
-                v-model="code"
-              />
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code" />
             </section>
             <section class="login_hint">
               温馨提示:未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -52,57 +31,26 @@
           <div :class="{ on: !isMsg }">
             <section>
               <section class="login_message">
-                <input
-                  type="tel"
-                  maxlength="11"
-                  placeholder="手机/邮箱/用户名"
-                  v-model="name"
-                />
+                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名" v-model="name" />
               </section>
               <section class="login_verification">
-                <input
-                  type="tel"
-                  maxlength="8"
-                  placeholder="密码"
-                  v-model="pwd"
-                />
+                <input type="tel" maxlength="8" placeholder="密码" v-model="pwd" />
                 <div class="switch_button off">
                   <div class="switch_circle"></div>
                   <span class="switch_text">...</span>
                 </div>
               </section>
               <section class="login_message">
-                <input
-                  type="text"
-                  maxlength="11"
-                  placeholder="验证码"
-                  v-model="captcha"
-                />
-                <img
-                  class="get_verification"
-                  src="http://localhost:4000/captcha"
-                  alt="captcha"
-                  ref="captcha"
-                  @click="getCaptcha"
-                />
+                <input type="text" maxlength="11" placeholder="验证码" v-model="captcha" />
+                <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" ref="captcha" @click="getCaptcha" />
               </section>
             </section>
           </div>
-          <button
-            class="login_submit"
-            @click.prevent="submit"
-          >登录</button>
+          <button class="login_submit" @click.prevent="submit">登录</button>
         </form>
-        <a
-          href="javascript:;"
-          class="about_us"
-        >关于我们</a>
+        <a href="javascript:;" class="about_us">关于我们</a>
       </div>
-      <span
-        href="javascript:"
-        class="go_back"
-        @click="$router.back()"
-      >
+      <span href="javascript:" class="go_back" @click="$router.back()">
         <i class="iconfont icon-jiantou2"></i>
       </span>
     </div>

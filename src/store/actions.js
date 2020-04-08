@@ -6,7 +6,10 @@ import {
     RESET_USER,
     RECEIVE_RATAING,
     RECEIVE_GOODS,
-    RECEIVE_INFO
+    RECEIVE_INFO,
+    ADD_FOOD,
+    DEC_FOOD,
+    CLEAR_FOOD
 } from "./mutation-types";
 
 import {
@@ -82,6 +85,20 @@ export default {
             cb && cb()
         }
     },
+
+    addFood({ commit }, { food }) {
+        commit(ADD_FOOD, { food })
+    },
+
+    decFood({ commit }, { food }) {
+        commit(DEC_FOOD, { food })
+    },
+
+    clearCart({ commit }) {
+        commit(CLEAR_FOOD)
+    }
+
+
 
 
 };
