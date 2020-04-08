@@ -9,7 +9,7 @@
       >
         <a>
           <div class="shop_left">
-            <!-- <img class="shop_img" :src="baseImgUrl+x.image_path" /> -->
+            <img class="shop_img" :src="baseImgUrl+x.image_path" />
           </div>
           <div class="shop_right">
             <section class="shop_detail_header">

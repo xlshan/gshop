@@ -6,7 +6,7 @@
           <!--current-->
           <li class="menu-item" :class="{'current':active==index}" v-for="(good, index) in goods" :key="index" @click="clickMenuItem(index)">
             <span class="text bottom-border-1px">
-              <img class="icon" :src="good.icon" v-if="good.icon">
+              <img class="icon" v-lazy="good.icon" v-if="good.icon">
               {{good.name}}
             </span>
           </li>
